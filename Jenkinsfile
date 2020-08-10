@@ -102,12 +102,12 @@ pipeline {
 }
 
 def boolean hasChangesIn(String module) {
-  if (env.CHANGE_TARGET == null) {
-    echo "CHANGE_TARGET not defined"
+  if (env.BRANCH_NAME == null) {
+    echo "BRANCH_NAME not defined"
     return true;
   }
 
-  def MASTER = sh(returnStdout: true, script: "git rev-parse origin/${env.CHANGE_TARGET}").trim()
+  def MASTER = sh(returnStdout: true, script: "git rev-parse origin/${env.BRANCH_NAME}").trim()
 
   // Gets commit hash of HEAD commit. Jenkins will try to merge master into
   // HEAD before running checks. If this is a fast-forward merge, HEAD does
